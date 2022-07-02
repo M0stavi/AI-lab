@@ -1,14 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Jun  3 11:52:55 2022
+Created on Sat Jul  2 16:13:35 2022
 
 @author: Asus
 """
-
-# minimax algo here:
-# def minimax()
-
-import turtle
 
 def take_zero(a,b,c,d,distance):
     lst =[]
@@ -124,126 +119,14 @@ def minimax (policeTurn, step_flag , distance):
 		#step = avoid_zero(minimax(True, 2,distance), minimax(True, 3 ,distance),minimax(True,4,distance),minimax(True, 5,distance),distance)
         #print("After Theif" , step_flag, distance)
         return step_flag
-
-screen = turtle.Screen()
-
-screen.bgcolor('lightblue')
-
-x = screen.numinput("Enter distance:",100)
-
-dist = x+1
-
-player = turtle.Turtle()
-
-player.color('blue')
-
-player.shape('turtle')
-
-# print(player.size())
-
-ai = player.clone()
-
-ai.color('red')
-
-player.penup()
-
-player.goto(-350, 100)
-
-ai.penup()
-
-ai.goto(350, 100)
-
-true = 1
-
-# x = screen.numinput("Enter distance:",100)
-
-x+=1
-
-stepsize = 700/x
-
-line = turtle.Turtle()
-
-line.penup()
-
-line.goto(-350,80)
-
-base = turtle.Turtle()
-
-base.penup()
-
-base.goto(350, 80)
-
-# line.pendown()
-
-xx = 20
-
-mm = int(x+1)
-
-for i in range(mm):
-    line.pendown()
-    line.forward(xx)
-    line.penup()
-    line.forward(stepsize-xx)
-    
+dist = 13
 while(dist>0):
-    steps = screen.numinput("Enter steps:",100)
-    
-    player.forward(stepsize*steps)
-    if(player.pos()==ai.pos()):
-        screen.title("Player lost the game!")
-        break
-    if(player.pos()>ai.pos()):
-        screen.title("Player won the game!")
-        break
-    
-    # steps_ai = screen.numinput("Enter steps:",100)
-    
-    tem = minimax (True, (steps,False) , dist)
-    
-    steps_ai = tem[0]
-    
-    
-    
-    ai.backward(steps_ai*stepsize )
-    if(player.pos()==ai.pos()):
-        screen.title("Player lost the game!")
-        break
-    if(player.pos()>ai.pos()):
-        screen.title("Player won the game!")
-        break
-    
-    dist-=steps
-    
-    dist-=steps_ai
-    
-    
-    
-        
-# while true == 1:
+    theif_step = int(input("Theif step : "))
+    police_step=minimax (True, (theif_step,False) , dist)
+    print("Police Step : ",police_step[0])
+    dist-=theif_step
+    dist -= police_step[0]
+    print(dist)
 
-#     steps = screen.numinput("Enter steps:",100)
-    
-#     player.forward(stepsize*steps)
-#     if(player.pos()==ai.pos()):
-#         screen.title("Player lost the game!")
-#         break
-#     if(player.pos()>ai.pos()):
-#         screen.title("Player won the game!")
-#         break
-    
-#     # from minimax:
-#     # steps_ai = minimax()
-    
-#     steps_ai = screen.numinput("Enter steps:",100)
-    
-#     ai.backward(steps_ai*stepsize )
-#     if(player.pos()==ai.pos()):
-#         screen.title("Player lost the game!")
-#         break
-#     if(player.pos()>ai.pos()):
-#         screen.title("Player won the game!")
-#         break
     
     
-
-turtle.done()
