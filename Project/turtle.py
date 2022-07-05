@@ -9,7 +9,7 @@ Created on Fri Jun  3 11:52:55 2022
 # def minimax()
 
 import turtle
-import numpy as np
+# import numpy as np
 
 def close():
     exit()
@@ -133,7 +133,9 @@ screen = turtle.Screen()
 
 screen.title("")
 
-# screen.bgcolor('lightblue')
+screen.bgcolor('lightblue')
+
+
 
 screen.bgpic("proj.gif")
 
