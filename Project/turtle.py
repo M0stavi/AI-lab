@@ -9,6 +9,10 @@ Created on Fri Jun  3 11:52:55 2022
 # def minimax()
 
 import turtle
+import numpy as np
+
+def close():
+    exit()
 
 def take_zero(a,b,c,d,distance):
     lst =[]
@@ -127,9 +131,17 @@ def minimax (policeTurn, step_flag , distance):
 
 screen = turtle.Screen()
 
+screen.title("")
+
 screen.bgcolor('lightblue')
 
-x = screen.numinput("Enter distance:",100)
+# x = screen.numinput("Enter distance:",100)
+
+screen.title("Level 1")
+
+x = 7
+
+# x = np.array([7,15,23],np.int32)
 
 dist = x+1
 
@@ -147,11 +159,11 @@ ai.color('red')
 
 player.penup()
 
-player.goto(-350, 100)
+player.goto(-350, 300)
 
 ai.penup()
 
-ai.goto(350, 100)
+ai.goto(350, 300)
 
 true = 1
 
@@ -165,13 +177,13 @@ line = turtle.Turtle()
 
 line.penup()
 
-line.goto(-350,80)
+line.goto(-350,280)
 
-base = turtle.Turtle()
+# base = turtle.Turtle()
 
-base.penup()
+# base.penup()
 
-base.goto(350, 80)
+# base.goto(350, 280)
 
 # line.pendown()
 
@@ -179,43 +191,89 @@ xx = 20
 
 mm = int(x+1)
 
+str = "abc"
+
+win = 0    
+
 for i in range(mm):
     line.pendown()
     line.forward(xx)
     line.penup()
     line.forward(stepsize-xx)
     
+# for i in range(3):
+#     dist = x[i]+1
+    
+    
 while(dist>0):
-    steps = screen.numinput("Enter steps:",100)
+    steps = screen.numinput("Steps:","Enter valid steps(2/3/4/5)")
+    
+    if steps != 2 and steps != 3 and steps != 4 and steps != 5:
+        continue
     
     player.forward(stepsize*steps)
-    if(player.pos()==ai.pos()):
-        screen.title("Player lost the game!")
+    
+    dist-=steps 
+    
+    if(dist == 0):
+        # screen.title("Player lost the game!")
+        str = "Player lost the game!"
+        win=0
         break
-    if(player.pos()>ai.pos()):
-        screen.title("Player won the game!")
+    
+    if(dist<0):
+        # screen.title("Player won the game!")
+        str = "Player won the game!"
+        win=1
         break
+    
+    # player.forward(stepsize*steps)
+    # if(player.pos()==ai.pos()):
+    #     screen.title("Player lost the game!")
+    #     break
+    # if(player.pos()>ai.pos()):
+    #     screen.title("Player won the game!")
+    #     break
     
     # steps_ai = screen.numinput("Enter steps:",100)
     
-    tem = minimax (True, (steps,False) , dist)
+    # tem = minimax (True, (steps,False) , dist)
+    
+    # steps_ai = tem[0]
+    
+    tem = minimax (True, (steps,False) , dist+steps)
     
     steps_ai = tem[0]
     
-    
-    
-    ai.backward(steps_ai*stepsize )
-    if(player.pos()==ai.pos()):
-        screen.title("Player lost the game!")
-        break
-    if(player.pos()>ai.pos()):
-        screen.title("Player won the game!")
-        break
-    
-    dist-=steps
-    
     dist-=steps_ai
     
+    ai.backward(steps_ai*stepsize )
+    
+    if(dist == 0):
+        # screen.title("Player lost the game!")
+        str = "Player lost the game!"
+        win=0
+        break
+    
+    if(dist<0):
+        # screen.title("Player won the game!")
+        str = "Player won the game!"
+        win=1
+        break
+    
+    
+    # ai.backward(steps_ai*stepsize )
+    # if(player.pos()==ai.pos()):
+    #     screen.title("Player lost the game!")
+    #     break
+    # if(player.pos()>ai.pos()):
+    #     screen.title("Player won the game!")
+    #     break
+    
+    # dist-=steps
+    
+    # dist-=steps_ai
+
     
     
         
@@ -246,4 +304,230 @@ while(dist>0):
     
     
 
-turtle.done()
+# turtle.done()
+
+# turtle.delay(3000)
+
+# for i in range(100000):
+#     print("hello")
+
+if win != 0:
+
+    ex = turtle.textinput(str,"Continue to level 2(yes/no)?")
+
+if win == 0:
+    ex = "no"
+    screen.title("Player lost the game!")
+
+if ex[0] == 'y':
+    
+
+    screen.title("Level 2")
+    
+    x = 15
+    
+    dist = x+1
+    
+    player.penup()
+    
+    player.goto(-350, 100)
+    
+    ai.penup()
+    
+    ai.goto(350, 100)
+    
+    true = 1
+    
+    x+=1
+
+    stepsize = 700/x
+
+    line = turtle.Turtle()
+
+    line.penup()
+
+    line.goto(-350,80)
+    
+    xx = 20
+
+    mm = int(x+1)
+
+    str = "abc"
+
+    win = 0    
+
+    for i in range(mm):
+        line.pendown()
+        line.forward(xx)
+        line.penup()
+        line.forward(stepsize-xx)
+        
+    while(dist>0):
+        steps = screen.numinput("Steps:","Enter valid steps(2/3/4/5)")
+        
+        if steps != 2 and steps != 3 and steps != 4 and steps != 5:
+            continue
+        
+        player.forward(stepsize*steps)
+        
+        dist-=steps 
+        
+        if(dist == 0):
+            # screen.title("Player lost the game!")
+            str = "Player lost the game!"
+            win=0
+            break
+        
+        if(dist<0):
+            # screen.title("Player won the game!")
+            str = "Player won the game!"
+            win=1
+            break
+        
+        # player.forward(stepsize*steps)
+        # if(player.pos()==ai.pos()):
+        #     screen.title("Player lost the game!")
+        #     break
+        # if(player.pos()>ai.pos()):
+        #     screen.title("Player won the game!")
+        #     break
+        
+        # steps_ai = screen.numinput("Enter steps:",100)
+        
+        # tem = minimax (True, (steps,False) , dist)
+        
+        # steps_ai = tem[0]
+        
+        tem = minimax (True, (steps,False) , dist+steps)
+        
+        steps_ai = tem[0]
+        
+        dist-=steps_ai
+        
+        ai.backward(steps_ai*stepsize )
+        
+        if(dist == 0):
+            # screen.title("Player lost the game!")
+            str = "Player lost the game!"
+            win=0
+            break
+        
+        if(dist<0):
+            # screen.title("Player won the game!")
+            str = "Player won the game!"
+            win=1
+            break
+        
+        
+if win != 0:
+
+    ex = turtle.textinput(str,"Continue to level 3(yes/no)?")
+
+if win == 0:
+    ex = "no"
+    screen.title("Player lost the game!")
+
+if ex[0] == 'y':
+    
+
+    screen.title("Level 3")
+    
+    x = 25
+    
+    dist = x+1
+    
+    player.penup()
+    
+    player.goto(-350, -230)
+    
+    ai.penup()
+    
+    ai.goto(350, -230)
+    
+    true = 1
+    
+    x+=1
+
+    stepsize = 700/x
+
+    line = turtle.Turtle()
+
+    line.penup()
+
+    line.goto(-350,-240)
+    
+    xx = 20
+
+    mm = int(x+1)
+
+    str = "abc"
+
+    win = 0    
+
+    for i in range(mm):
+        line.pendown()
+        line.forward(xx)
+        line.penup()
+        line.forward(stepsize-xx)
+        
+    while(dist>0):
+        steps = screen.numinput("Steps:","Enter valid steps(2/3/4/5)")
+        
+        if steps != 2 and steps != 3 and steps != 4 and steps != 5:
+            continue
+        
+        player.forward(stepsize*steps)
+        
+        dist-=steps 
+        
+        if(dist == 0):
+            # screen.title("Player lost the game!")
+            str = "Player lost the game!"
+            win=0
+            break
+        
+        if(dist<0):
+            # screen.title("Player won the game!")
+            str = "Player won the game!"
+            win=1
+            break
+        
+        # player.forward(stepsize*steps)
+        # if(player.pos()==ai.pos()):
+        #     screen.title("Player lost the game!")
+        #     break
+        # if(player.pos()>ai.pos()):
+        #     screen.title("Player won the game!")
+        #     break
+        
+        # steps_ai = screen.numinput("Enter steps:",100)
+        
+        # tem = minimax (True, (steps,False) , dist)
+        
+        # steps_ai = tem[0]
+        
+        tem = minimax (True, (steps,False) , dist+steps)
+        
+        steps_ai = tem[0]
+        
+        dist-=steps_ai
+        
+        ai.backward(steps_ai*stepsize )
+        
+        if(dist == 0):
+            # screen.title("Player lost the game!")
+            str = "Player lost the game!"
+            win=0
+            break
+        
+        if(dist<0):
+            # screen.title("Player won the game!")
+            str = "Player won the game!"
+            win=1
+            break
+    
+
+ex = screen.textinput(str,"Press any character(a-z)")
+
+if ex != "":
+    turtle.bye()
