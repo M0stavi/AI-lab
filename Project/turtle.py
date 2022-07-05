@@ -133,7 +133,9 @@ screen = turtle.Screen()
 
 screen.title("")
 
-screen.bgcolor('lightblue')
+# screen.bgcolor('lightblue')
+
+screen.bgpic("proj.gif")
 
 # x = screen.numinput("Enter distance:",100)
 
